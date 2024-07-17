@@ -5,6 +5,7 @@ import com.example.ncc_spring.controller.employee.EmployeeCrudController;
 import com.example.ncc_spring.model.dto.EmployeeReqSaveDto;
 import com.example.ncc_spring.model.entity.Employee;
 import com.example.ncc_spring.service.employee.EmployeeCrudService;
+import com.example.ncc_spring.service.employee.UploadListEmployee;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
@@ -30,6 +31,8 @@ public class EmployeeCrudControllerTest {
     @MockBean
     private EmployeeCrudService employeeCrudService;
 
+    @MockBean
+    private UploadListEmployee uploadListEmployee;
     @Autowired
     private ObjectMapper objectMapper;
 
@@ -68,8 +71,8 @@ public class EmployeeCrudControllerTest {
         mockMvc.perform(post("/employees")
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(objectMapper.writeValueAsString(employeeReqSaveDto)))
-                .andExpect(status().isCreated())
-                .andExpect(MockMvcResultMatchers.content().string("Create success"))
+                .andExpect(status().isOk())
+                .andExpect(MockMvcResultMatchers.content().string("{\"message\":\"Success\",\"status\":200,\"data\":\"Create success\"}"))
                 .andDo(print());
     }
 }

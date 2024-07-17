@@ -42,13 +42,26 @@ public class JwtAuthFilter extends OncePerRequestFilter {
             filterChain.doFilter(request, response);
             return;
         }
+        if(request.getRequestURI().startsWith("/token")) {
+            filterChain.doFilter(request, response);
+            return;
+        }
             String authHeader = request.getHeader("Authorization");
             String token = null;
             JwtDecryptData jwtDecryptData = new JwtDecryptData();
-            if(authHeader != null && authHeader.startsWith("Bearer ")) {
+
+            if (authHeader != null && authHeader.startsWith("Bearer ")) {
                 token = authHeader.substring(7);
-                if(jwtService.verifyToken(token)) {
-                    jwtDecryptData = jwtService.decryptToken(token);
+                try {
+                    if (jwtService.verifyToken(token) != null) {
+                        jwtDecryptData = jwtService.decryptToken(token);
+                    }
+                } catch (Exception e) {
+                    // Token verification failed
+                    response.setContentType("application/json");
+                    response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
+                    response.getOutputStream().println("{ \"error\": \"" + e.getMessage() + "\" }");
+                    return;
                 }
             }
             if(jwtDecryptData != null && SecurityContextHolder.getContext().getAuthentication() == null) {

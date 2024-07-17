@@ -23,7 +23,7 @@ public class LoginController {
     @Autowired
     private final LoginService loginService;
 
-
+    @CrossOrigin
     @PostMapping("/username")
     public ResponseEntity<?> loginWithUsernameAndPassword(@RequestBody LoginRequestDto loginRequestDto) {
         return SuccessResponseHelper.createSuccessResponse(loginService.login(loginRequestDto));

@@ -34,6 +34,8 @@ public class EmployeeCrudController {
         return SuccessResponseHelper.createSuccessResponse(employeesPage);
     }
 
+    @CrossOrigin
+    @PreAuthorize("hasRole('ADMIN')")
     @GetMapping("/{id}")
     public ResponseEntity<?> getEmployeeById(@PathVariable long id) {
         return SuccessResponseHelper.createSuccessResponse(crudService.getEmployeeById(id));

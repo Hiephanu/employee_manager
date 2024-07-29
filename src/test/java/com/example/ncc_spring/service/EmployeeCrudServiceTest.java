@@ -32,18 +32,16 @@ import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
-@ContextConfiguration(classes = Config.class)
-@WebMvcTest(EmployeeCrudServiceInterface.class)
 public class EmployeeCrudServiceTest {
-    @MockBean
+    @Mock
     private EmployeeRepository employeeRepository;
 
-    @MockBean
+    @Mock
     private EmployeeResDtoMapper employeeResDtoMapper;
-    @MockBean
+    @Mock
     private EmployeeReqSaveMapper employeeReqSaveMapper;
-    @Autowired
-    private EmployeeCrudServiceInterface employeeCrudService;
+    @InjectMocks
+    private EmployeeCrudService employeeCrudService;
 
     @Test
     public void testSaveEmployeeService() {

@@ -1,15 +1,8 @@
 package com.example.ncc_spring.filter;
 
-import com.example.ncc_spring.enums.Provider;
-import com.example.ncc_spring.exception.ExceptionEntity.UnauthorizedException;
 import com.example.ncc_spring.model.dto.JwtDecryptData;
 import com.example.ncc_spring.model.entity.Account;
-import com.example.ncc_spring.model.entity.AccountGoogle;
-import com.example.ncc_spring.model.entity.AccountUsername;
-import com.example.ncc_spring.repository.auth.AccountGoogleRepository;
 import com.example.ncc_spring.repository.auth.AccountRepository;
-import com.example.ncc_spring.repository.auth.AccountUsernameRepository;
-import com.example.ncc_spring.service.auth.CustomUserDetail;
 import com.example.ncc_spring.service.auth.JwtService;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
@@ -19,9 +12,6 @@ import lombok.AllArgsConstructor;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.oauth2.client.authentication.OAuth2AuthenticationToken;
-import org.springframework.security.oauth2.core.user.DefaultOAuth2User;
-import org.springframework.security.oauth2.core.user.OAuth2User;
 import org.springframework.stereotype.Component;
 import org.springframework.web.filter.OncePerRequestFilter;
 

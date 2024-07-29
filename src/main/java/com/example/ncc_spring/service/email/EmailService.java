@@ -66,7 +66,7 @@ public class EmailService {
                 helper.setSubject(mailDataDto.getSubject());
                 helper.setText(html, true);
                 System.out.println(Thread.currentThread().getName());
-//                javaMailSender.send(message);
+                javaMailSender.send(message);
 
             } catch (MessagingException e) {
                 throw new RuntimeException(e);

@@ -41,9 +41,10 @@ public class LoginService {
     private final AuthenticationManager authenticationManager;
 
     public LoginResDto login(LoginRequestDto loginRequestDto) {
-            authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(
-                    loginRequestDto.getUsername(), loginRequestDto.getPassword()
-            ));
+//            Authentication authentication = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(
+//                    loginRequestDto.getUsername(), loginRequestDto.getPassword()
+//            ));
+
             AccountUsername account = accountUsernameRepository.findByUsername(loginRequestDto.getUsername());
             if(account == null) {
                 throw new NotFoundException("User isn't found");

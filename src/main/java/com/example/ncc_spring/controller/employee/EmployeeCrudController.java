@@ -41,6 +41,7 @@ public class EmployeeCrudController {
         return SuccessResponseHelper.createSuccessResponse(crudService.getEmployeeById(id));
     }
 
+    @PreAuthorize("hasRole('ADMIN')")
     @PostMapping("")
     public ResponseEntity<?> saveEmployee(@Valid @RequestBody EmployeeReqSaveDto employeeReqSaveDto) {
         crudService.saveEmployee(employeeReqSaveDto);
